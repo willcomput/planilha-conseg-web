@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilha de Controle e Prestação de Contas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <section id="passwordSection" class="p-6 bg-yellow-50 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-3 text-yellow-700">Acesso Restrito</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div>
+                    <label for="passwordInput" class="block text-sm font-medium text-gray-700 mb-1">Senha de Acesso:</label>
+                    <input type="password" id="passwordInput" class="form-password" placeholder="Digite a senha">
+                </div>
+                <div>
+                    <button type="button" id="loginButton" class="btn-primary w-full md:w-auto">Desbloquear Acesso</button>
+                </div>
+            </div>
+             <p class="text-xs text-gray-500 mt-2">Para inserir ou excluir dados, por favor, insira a senha.</p>
+        </section>
+
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold mb-2">Planilha de Controle e Prestação de Contas</h1>
+            <p class="text-gray-600">Recursos para Aquisição de Equipamentos Diversos</p>
+        </header>
+
+        <section class="mb-8 p-6 bg-gray-50 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">1. Identificação do Recurso</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <p class="font-medium text-gray-800">Fonte do Recurso:</p>
+                    <p class="text-gray-600">CONSEG Vila Rica em parceria com o MPMT</p>
+                </div>
+                <div>
+                    <p class="font-medium text-gray-800">Valor Total Disponibilizado:</p>
+                    <p class="text-2xl font-bold text-green-600">R$ <span id="totalDisponibilizado">60000.00</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8 p-6 bg-gray-50 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">2. Controle de Despesas</h2>
+            <form id="formDespesa" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                <div>
+                    <label for="dataAquisicao" class="block text-sm font-medium text-gray-700 mb-1">Data da Aquisição:</label>
+                    <input type="date" id="dataAquisicao" name="dataAquisicao" class="form-input" required disabled>
+                </div>
+                <div class="md:col-span-2 lg:col-span-1">
+                    <label for="descricaoItem" class="block text-sm font-medium text-gray-700 mb-1">Descrição do Item/Serviço:</label>
+                    <input type="text" id="descricaoItem" name="descricaoItem" class="form-input" placeholder="Ex: Monitor LED 24 polegadas" required disabled>
+                </div>
+                <div>
+                    <label for="valorPago" class="block text-sm font-medium text-gray-700 mb-1">Valor Pago (R$):</label>
+                    <input type="number" id="valorPago" name="valorPago" step="0.01" min="0" class="form-input" placeholder="Ex: 250.50" required disabled>
+                </div>
+                <div>
+                    <label for="fornecedor" class="block text-sm font-medium text-gray-700 mb-1">Fornecedor:</label>
+                    <input type="text" id="fornecedor" name="fornecedor" class="form-input" placeholder="Ex: Loja XYZ Ltda" required disabled>
+                </div>
+                <div>
+                    <label for="numDocumento" class="block text-sm font-medium text-gray-700 mb-1">Nº Documento Fiscal/Comprovante:</label>
+                    <input type="text" id="numDocumento" name="numDocumento" class="form-input" placeholder="Ex: NF-e 12345 / Recibo 001" required disabled>
+                </div>
+                <div class="md:col-span-2 lg:col-span-3">
+                    <label for="observacoes" class="block text-sm font-medium text-gray-700 mb-1">Observações (Opcional):</label>
+                    <textarea id="observacoes" name="observacoes" rows="2" class="form-input" placeholder="Detalhes adicionais, se houver" disabled></textarea>
+                </div>
+                <div class="md:col-span-2 lg:col-span-3 flex justify-end">
+                    <button type="submit" id="adicionarDespesaButton" class="btn-primary" disabled>Adicionar Despesa</button>
+                </div>
+            </form>
+
+            <div class="overflow-x-auto">
+                <table id="tabelaDespesas" class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Valor (R$)</th>
+                            <th>Fornecedor</th>
+                            <th>Doc. Fiscal</th>
+                            <th>Observações</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="mb-8 p-6 bg-gray-50 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">3. Resumo Financeiro</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="summary-card">
+                    <p class="text-lg font-medium text-gray-800">Total Já Gasto:</p>
+                    <p class="text-3xl font-bold text-red-600">R$ <span id="totalGasto">0.00</span></p>
+                </div>
+                <div class="summary-card">
+                    <p class="text-lg font-medium text-gray-800">Saldo Disponível:</p>
+                    <p class="text-3xl font-bold text-blue-600">R$ <span id="saldoDisponivel">60000.00</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="p-6 bg-gray-50 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">4. Instruções de Uso</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-600">
+                <li>Insira a senha na seção "Acesso Restrito" e clique em "Desbloquear Acesso" para habilitar a adição e exclusão de despesas.</li>
+                <li>Preencha todos os campos do formulário "Controle de Despesas" para cada nova aquisição ou pagamento.</li>
+                <li>Clique no botão "Adicionar Despesa" para registrar o item na tabela.</li>
+                <li>O "Total Já Gasto" e o "Saldo Disponível" no "Resumo Financeiro" são atualizados automaticamente.</li>
+                <li>Verifique os dados inseridos com atenção para garantir a precisão das informações.</li>
+                <li>Para remover uma despesa, clique no botão "Excluir" na respectiva linha da tabela (requer acesso desbloqueado).</li>
+                <li>Esta planilha visa garantir o controle financeiro e a transparência na prestação de contas dos recursos.</li>
+            </ul>
+        </section>
+    </div>
+
+    <div id="customAlert" class="custom-alert">
+        <p id="customAlertMessage"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
